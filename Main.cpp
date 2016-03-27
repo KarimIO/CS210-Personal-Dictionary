@@ -2,10 +2,18 @@
 #include <string>
 #include <fstream>
 #include "hashTable.h"
+#include "BinaryTree.h"
 
 struct UserInfo {
 	std::string pass;
 	int admin;
+};
+
+struct PersonInfo {
+	std::string Position;
+	int Room;
+	std::string Mobile;
+	std::string Phone;
 };
 
 bool readUserbase(hashTable<std::string, UserInfo> &hash) {
@@ -22,7 +30,7 @@ bool readUserbase(hashTable<std::string, UserInfo> &hash) {
 
 	if (!input) {
 		std::cout << "The userbase failed to load. Quitting." << std::endl;
-		system("pause");
+		std::system("pause");
 		return false;
 	}
 //#endif
@@ -53,6 +61,75 @@ bool readUserbase(hashTable<std::string, UserInfo> &hash) {
 	}
 
 	return true;
+}
+
+int getControl(std::string name, bool admin) {
+	std::cout << "Username: " << name << std::endl << std::endl;
+	std::cout << "Enter a number to do the corresponding command: " << std::endl;
+
+	int command = -1;
+	if (admin) {
+		std::cout << "1 - Reload Directory" << std::endl;
+		std::cout << "2 - Save Directory" << std::endl;
+		std::cout << "3 - Add Person" << std::endl;
+		std::cout << "4 - Change Person Info" << std::endl;
+		std::cout << "5 - Delete Person" << std::endl;
+		std::cout << "6 - List People" << std::endl;
+		std::cout << "7 - View Person by Name" << std::endl << std::endl;
+		std::cout << "0 - Exit Program" << std::endl << std::endl;
+
+		std::cout << "Your Input: ";
+		std::cin >> command;
+
+		while (command < 0 || command > 7) {
+			std::cout << "Invalid input. Try again: ";
+			std::cin >> command;
+		}
+	}
+	else {
+		std::cout << "7 - View Person by Name" << std::endl << std::endl;
+		std::cout << "0 - Exit Program" << std::endl;
+
+		while (command != 0 && command != 7) {
+			std::cout << "Invalid input. Try again: ";
+			std::cin >> command;
+		}
+		
+	}
+
+	return command;
+}
+
+void LoadDirectory(FILE *input, binaryTree<std::string, PersonInfo> &tree) {
+	input = fopen("directory.txt", "r");
+
+	if (!input) {
+		std::cout << "The userbase failed to load. Quitting." << std::endl;
+		std::system("pause");
+		return;
+	}
+
+	char buffer[1024];
+	char *name;
+	PersonInfo pi;
+	while (feof(input) == 0) {
+		fscanf(input, "%[^\n]\n", buffer);
+		name = strtok(buffer, ",");
+		pi.Position = strtok(NULL, ",");
+		pi.Room = std::stoi(strtok(NULL, ","));
+		pi.Mobile = strtok(NULL, ",");
+		pi.Phone = strtok(NULL, ",");
+
+		tree.insert(name, pi);
+	}
+}
+
+void SearchUser(binaryTree<std::string, PersonInfo> &tree) {
+	std::string searchStr;
+	std::cout << "Search for user: ";
+	std::getline(std::cin, searchStr);
+	std::getline(std::cin, searchStr);
+	std::cout << tree.search(searchStr) << std::endl;
 }
 
 int main() {
@@ -89,10 +166,47 @@ int main() {
 	system("pause");
 	system("cls");
 
-	std::cout << "Username: " << name << std::endl;
 	admin = userInfo.admin;
-	std::cout << (admin ? "Admin" : "Regular") << std::endl;
 
-	system("pause");
+	FILE *input = NULL;
+	binaryTree<std::string, PersonInfo> tree;
+
+	int control, subcontrol;
+	while ((control = getControl(name, admin)) != 0) {
+		switch (control) {
+		case 1:
+			LoadDirectory(input, tree);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			SearchUser(tree);
+			break;
+		}
+
+		/*
+		std::cout << "1 - Reload Directory" << std::endl;
+		std::cout << "2 - Save Directory" << std::endl;
+		std::cout << "3 - Add Person" << std::endl;
+		std::cout << "4 - Change Person Info" << std::endl;
+		std::cout << "5 - Delete Person" << std::endl;
+		std::cout << "6 - List People" << std::endl;
+		std::cout << "7 - View Person by Name" << std::endl << std::endl;
+		*/
+
+		std::system("pause");
+		std::system("cls");
+	}
+
+
+	std::cout << "Shutting Down..." << std::endl;
 	return true;
 }

@@ -26,5 +26,8 @@
     <ClInclude Include="hashTable.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryTree.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
