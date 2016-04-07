@@ -45,4 +45,4 @@ private:
 
 };
 #endif // BIN_TREE_H
-#include "binaryTree.cpp"
+#include "binarytree.cpp"

@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -166,12 +168,12 @@ int main() {
 	system("pause");
 	system("cls");
 
-	admin = userInfo.admin;
+	admin = (bool)userInfo.admin;
 
 	FILE *input = NULL;
 	binaryTree<std::string, PersonInfo> tree;
 
-	int control, subcontrol;
+	int control;
 	while ((control = getControl(name, admin)) != 0) {
 		switch (control) {
 		case 1:

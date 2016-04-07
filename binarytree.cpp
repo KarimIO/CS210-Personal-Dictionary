@@ -1,3 +1,6 @@
+#ifndef BINARY_TREE_CPP
+#define BINARY_TREE_CPP
+#include "binaryTree.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -32,9 +35,9 @@ bool binaryTree<keyType, dataType>::insert2(NodePointer &aRoot, const keyType &k
 	else if (k == aRoot->key)
 		return false;
 	else if (k < aRoot->key)
-		insert2(aRoot->left, k, d);
+		return insert2(aRoot->left, k, d);
 	else
-		insert2(aRoot->right, k, d);
+		return insert2(aRoot->right, k, d);
 	
 	/* if empty tree (base case #1 insert a new key)
 	Create new node
@@ -111,3 +114,5 @@ bool binaryTree<keyType, dataType>::empty() const
 {
 	return(root == NULL);
 } // end of empty
+
+#endif
