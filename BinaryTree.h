@@ -20,6 +20,9 @@ public:
 	// RETRIEVE DATA FOR A GIVEN KEY
 	bool retrieve(const keyType &, dataType &) const;
 
+	bool editdata(const keyType &, dataType &) const;
+	
+
 private:
 	// Node Class
 	class treeNode
@@ -43,6 +46,9 @@ private:
 	// Searches a subtree for a key and retrieves data
 	bool retrieve2(NodePointer, const keyType &, dataType &) const;
 
+	bool editdata2(NodePointer, const keyType &, dataType &) const;
+
+
 };
 #endif // BIN_TREE_H
-#include "binarytree.cpp"
+#include "binaryTree.cpp"

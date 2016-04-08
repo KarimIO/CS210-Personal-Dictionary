@@ -1,6 +1,3 @@
-#ifndef BINARY_TREE_CPP
-#define BINARY_TREE_CPP
-#include "binaryTree.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -35,9 +32,9 @@ bool binaryTree<keyType, dataType>::insert2(NodePointer &aRoot, const keyType &k
 	else if (k == aRoot->key)
 		return false;
 	else if (k < aRoot->key)
-		return insert2(aRoot->left, k, d);
+		insert2(aRoot->left, k, d);
 	else
-		return insert2(aRoot->right, k, d);
+		insert2(aRoot->right, k, d);
 	
 	/* if empty tree (base case #1 insert a new key)
 	Create new node
@@ -86,6 +83,40 @@ bool binaryTree<keyType, dataType>::retrieve(const keyType &k, dataType &d) cons
 	return retrieve2(root, k, d);
 } // end of public retrieve   
 
+
+template <class keyType, class dataType>
+bool binaryTree<keyType, dataType>::editdata(const keyType &k, dataType &d) const
+{
+	return editdata2(root, k, d);
+}   
+
+template <class keyType, class dataType>
+bool binaryTree<keyType, dataType>::editdata2(NodePointer aRoot, const keyType &k, dataType &d)	const
+{
+	if (aRoot == NULL)
+		return false;
+	else if (aRoot->key == k) {
+		d = aRoot->data;
+		return true;
+	}
+	else if (k < aRoot->k)
+	{
+		return editdata2(aRoot->left, k, d);
+		d=aRoot->data;
+	}
+	else
+	{
+		return editdata2(aRoot->right, k, d);
+		d=aRoot->data;
+	}
+	/* if empty tree then return false   (base case#1 not found)
+	else if found then get data  and return true (base case#2 found)
+	else if k is less than current key then call retrieve2 with left subtree
+	else call retrieve2 with right subtree
+	*/
+} // end of private retrieve
+
+
 template <class keyType, class dataType>
 bool binaryTree<keyType, dataType>::retrieve2(NodePointer aRoot, const keyType &k, dataType &d)	const
 {
@@ -115,4 +146,38 @@ bool binaryTree<keyType, dataType>::empty() const
 	return(root == NULL);
 } // end of empty
 
-#endif
+
+/*template <class keyType, class dataType>
+bool binaryTree<keyType, dataType>::editdata(const keyType &k, dataType &d)
+{
+	NodePointer t=root;
+	
+	if (t == NULL)
+		return false;	
+	else if (t->key == k) 
+	{
+		d = t->data;
+		return true;
+	}
+	else
+	{
+		while (t != NULL)
+		{
+			if (k < t->key)
+				t = t->left;
+
+			if (k > t->key)
+				t = t->right;
+
+			if (t->key == k)
+			{
+				return true;
+				t->data = d;
+			}
+			else 
+				return false;
+		}
+
+	}
+
+}*/
