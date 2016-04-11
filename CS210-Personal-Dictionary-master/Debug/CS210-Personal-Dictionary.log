@@ -1,0 +1,19 @@
+﻿  Main.cpp
+c:\users\my work\desktop\cs210-personal-dictionary-master\main.cpp(176): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\my work\desktop\cs210-personal-dictionary-master\main.cpp(185): warning C4101: 'subcontrol': unreferenced local variable
+c:\users\my work\desktop\cs210-personal-dictionary-master\binarytree.cpp(191): warning C4101: 'psx': unreferenced local variable
+  c:\users\my work\desktop\cs210-personal-dictionary-master\binarytree.cpp(187): note: while compiling class template member function 'bool binaryTree<std::string,PersonInfo>::remove(const keyType &)'
+          with
+          [
+              keyType=std::string
+          ]
+  c:\users\my work\desktop\cs210-personal-dictionary-master\main.cpp(351): note: see reference to function template instantiation 'bool binaryTree<std::string,PersonInfo>::remove(const keyType &)' being compiled
+          with
+          [
+              keyType=std::string
+          ]
+  c:\users\my work\desktop\cs210-personal-dictionary-master\main.cpp(123): note: see reference to class template instantiation 'binaryTree<std::string,PersonInfo>' being compiled
+  hashTable.cpp
+  Generating Code...
+c:\users\my work\desktop\cs210-personal-dictionary-master\binarytree.cpp(49): warning C4715: 'binaryTree<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,PersonInfo>::insert2': not all control paths return a value
+  CS210-Personal-Dictionary.vcxproj -> C:\Users\MY WORK\Desktop\CS210-Personal-Dictionary-master\Debug\CS210-Personal-Dictionary.exe
